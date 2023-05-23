@@ -4,6 +4,15 @@ set -euo pipefail
 # Run `make start-host` in another terminal before running this script
 # To build and start a ccf network and automatically deploy your application on it.
 
+# Activate Sandbox VirtualEnv to provide access to installed `ccf` Python module
+VENV_DIR=${VENV_DIR:-.venv_ccf_sandbox}
+if [ ! -f "${VENV_DIR}/bin/activate" ]; then
+    echo "Sandbox VirtualEnv unavailable. Ensure Sandbox.sh has been executed"
+    exit 1
+fi
+# shellcheck source=/dev/null
+source "${VENV_DIR}"/bin/activate
+
 declare server="https://127.0.0.1:8000"
 declare certificate_dir=workspace/sandbox_common
 
