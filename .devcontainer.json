@@ -1,6 +1,6 @@
 {
   "name": "CCF Samples",
-  "image": "mcr.microsoft.com/ccf/app/dev:3.0.1-virtual",
+  "image": "mcr.microsoft.com/ccf/app/dev:4.0.2-virtual",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -8,7 +8,8 @@
         "vsls-contrib.codetour",
         "esbenp.prettier-vscode",
         "timonwong.shellcheck",
-        "github.vscode-pull-request-github"
+        "github.vscode-pull-request-github",
+        "ms-vscode.makefile-tools"
       ],
       "settings": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
