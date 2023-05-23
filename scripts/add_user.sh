@@ -7,9 +7,9 @@ function create_user_proposal {
     local certFile=$1
     local setUserFile=$2
 
-    cert=$(< $certFile sed '$!G' | paste -sd '\\n' -)
+    cert=$(< "$certFile" sed '$!G' | paste -sd '\\n' -)
 
-    cat <<JSON > $setUserFile
+    cat <<JSON > "$setUserFile"
 {
   "actions": [
     {
@@ -63,7 +63,7 @@ fi
 
 
 echo "Looking for certificate file..."
-certFile_exists=$(ls $cert_file 2>/dev/null || true)
+certFile_exists=$(ls "$cert_file" 2>/dev/null || true)
 if [ -z "$certFile_exists" ]; then
     echo "Cert file \"$cert_file\" does not exist."
     exit 0
@@ -75,11 +75,11 @@ then
     exit 0
 fi
 
-certs_folder=`dirname $cert_file`
+certs_folder=$(dirname "$cert_file")
 proposal_json_file="${certs_folder}/set_user.json"
 
 echo "Creating user json proposal file..."
-create_user_proposal $cert_file $proposal_json_file
+create_user_proposal "$cert_file" "$proposal_json_file"
 
 user_id=$(openssl x509 -in "$cert_file" -noout -fingerprint -sha256 | cut -d "=" -f 2 | sed 's/://g' | awk '{print tolower($0)}')
 

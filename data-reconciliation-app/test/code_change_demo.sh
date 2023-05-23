@@ -74,7 +74,7 @@ addCheckpoint "🎬 Member 0 Submitted a proposal and voted in favour of the pro
 
 printf "💤Get reconciliation report for member 1\n"
 #curl $reportUrl -X GET $(cert_arg member1) | jq > ../../demo-app/Reports/Member1_Code_Change_V1.json
-curl $reportUrl/$id -X GET $(cert_arg member1) --no-progress-meter | jq '. | {content}'
+curl "$reportUrl"/$id -X GET $(cert_arg member1) --no-progress-meter | jq '. | {content}'
 addCheckpoint "🎬 Existing reconciliation summary for member 1"
 
 printf "\n💤Member 2 will accept the new application\n"
@@ -82,5 +82,5 @@ printf "\n💤Member 2 will accept the new application\n"
 addCheckpoint "🎬 Member2 casting a vote in favour of the proposal."
 
 printf "\n💤Get reconciliation report for member 1 again\n"
-curl $reportUrl/$id -X GET $(cert_arg member1) --no-progress-meter | jq '. | {content}'
+curl "$reportUrl"/$id -X GET $(cert_arg member1) --no-progress-meter | jq '. | {content}'
 echo "🏁 New reconciliation summary for member 1"

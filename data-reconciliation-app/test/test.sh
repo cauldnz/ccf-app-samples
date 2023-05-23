@@ -62,7 +62,7 @@ echo "💤 Waiting for the app frontend..."
 # There is a side effect here in the case of the sandbox as it creates the 'workspace/sandbox_common' everytime
 # it starts up. The following condition not only checks that this pem file has been created, it also checks it
 # is valid. Don't be caught out by the folder existing from a previous run.
-while [ "200" != "$(curl "$server/app/commit" --cacert "${certificate_dir}/service_cert.pem" $only_status_code)" ]
+while [ "200" != "$(curl "$server/app/commit" --cacert "${certificate_dir}/service_cert.pem" "$only_status_code")" ]
 do
     sleep 1
 done
@@ -71,7 +71,7 @@ done
 echo "Running TypeScript flow..."
 
 # adding read permission to .pem files so node application can have access
-sudo chmod +r ${certificate_dir}/*.pem
+sudo chmod +r "${certificate_dir}"/*.pem
 
 # Calling npm command with the necessary variables
 export SERVER=${server}
