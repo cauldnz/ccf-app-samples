@@ -4,14 +4,16 @@ set -euo pipefail
 # Run `make start-host` in another terminal before running this script
 # To build and start a ccf network and automatically deploy your application on it.
 
-# Activate Sandbox VirtualEnv to provide access to installed `ccf` Python module
-VENV_DIR=${VENV_DIR:-.venv_ccf_sandbox}
+VENV_DIR=${VENV_DIR:-.venv_ccf_banking_app_client}
+
 if [ ! -f "${VENV_DIR}/bin/activate" ]; then
-    echo "Sandbox VirtualEnv unavailable. Ensure Sandbox.sh has been executed"
-    exit 1
+    echo "Creating virtualenv to execute demo"
+    python3.8 -m venv "${VENV_DIR}"
 fi
+
 # shellcheck source=/dev/null
 source "${VENV_DIR}"/bin/activate
+pip install --upgrade pip ccf cryptography
 
 declare server="https://127.0.0.1:8000"
 declare certificate_dir=workspace/sandbox_common
@@ -20,7 +22,7 @@ declare certificate_dir=workspace/sandbox_common
 # There is a side effect here in the case of the sandbox as it creates the 'workspace/sandbox_common' everytime
 # it starts up. The following condition not only checks that this pem file has been created, it also checks it
 # is valid. Don't be caught out by the folder existing from a previous run.
-if [ "200" != "$(curl $server/node/network -k -s -o /dev/null -w %{http_code})" ]; then
+if [ "200" != "$(curl $server/node/network -k -s -o /dev/null -w '%{http_code}')" ]; then
     echo "💥 Have you started the sandbox?"
     exit 1
 fi
