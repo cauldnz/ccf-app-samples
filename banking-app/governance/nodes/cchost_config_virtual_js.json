@@ -1,7 +1,7 @@
 {
   "enclave": {
     "file": "/usr/lib/ccf/libjs_generic.virtual.so",
-    "type": "Virtual",
+    "type": "Debug",
     "platform": "Virtual"
   },
   "network": {
