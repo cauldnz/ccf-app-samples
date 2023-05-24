@@ -7,13 +7,4 @@ cd "$(dirname "$0")"
 
 set -e
 
-VENV_DIR=${VENV_DIR:-.venv_ccf_verify_receipt}
-
-if [ ! -f "${VENV_DIR}/bin/activate" ]; then
-    python3.8 -m venv "${VENV_DIR}"
-fi
-
-source "${VENV_DIR}"/bin/activate
-pip install --quiet --upgrade pip ccf
-
 python verify_receipt.py <&0
