@@ -13,7 +13,7 @@ fi
 
 # shellcheck source=/dev/null
 source "${VENV_DIR}"/bin/activate
-pip install --upgrade pip ccf cryptography
+pip install --quiet --upgrade pip ccf cryptography
 
 declare server="https://127.0.0.1:8000"
 declare certificate_dir=workspace/sandbox_common

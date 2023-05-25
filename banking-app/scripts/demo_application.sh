@@ -27,8 +27,7 @@ transfer_transaction_id=$(curl ${server}/app/transfer/$account_type0 -X POST -i 
 # "transaction ID of the transfer: $transfer_transaction_id"
 
 # Wait until the receipt becomes available
-only_status_code="-s -o /dev/null -w %{http_code}"
-while [ "200" != "$(curl ${server}/app/receipt?transaction_id="$transfer_transaction_id" --cacert service_cert.pem --key user0_privk.pem --cert user0_cert.pem "$only_status_code")" ]
+while [ "200" != "$(curl ${server}/app/receipt?transaction_id="$transfer_transaction_id" --cacert service_cert.pem --key user0_privk.pem --cert user0_cert.pem -s -o /dev/null -w "%{http_code}")" ]
 do
     sleep 1
 done
